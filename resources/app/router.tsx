@@ -12,6 +12,7 @@ import AppProvider from "./providers/AppProvider";
 const Home = React.lazy(() => import("@/pages/Home"));
 const Login = React.lazy(() => import("@/pages/Login"));
 const Search = React.lazy(() => import("@/pages/Search"));
+const Albums = React.lazy(() => import("@/pages/Albums"));
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -25,6 +26,26 @@ const router = createBrowserRouter(
     >
       <Route
         index
+        element={
+          <React.Suspense fallback={<RouteLoading />}>
+            <AppProvider>
+              <Home />
+            </AppProvider>
+          </React.Suspense>
+        }
+      />
+      <Route
+        path="/albums"
+        element={
+          <React.Suspense fallback={<RouteLoading />}>
+            <AppProvider>
+              <Albums />
+            </AppProvider>
+          </React.Suspense>
+        }
+      />
+      <Route
+        path="/songs"
         element={
           <React.Suspense fallback={<RouteLoading />}>
             <AppProvider>

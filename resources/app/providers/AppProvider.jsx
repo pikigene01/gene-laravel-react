@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 export const AppContext = createContext();
 export default function AppProvider({ children }) {
   const [playLists, setPlayLists] = useLocalStorage("playlists", []);
+  const [songs, setSongs] = useLocalStorage("songs", []);
+  const [artists, setArtists] = useLocalStorage("artists", []);
   const [user, setUser] = useLocalStorage("user", false);
   const [searchResults, setSearchResults] = useLocalStorage("searched", []);
   const [searchValue, setSearchValue] = useState("");
@@ -25,6 +27,8 @@ export default function AppProvider({ children }) {
     navigate,
     user,
     logOut,
+    songs,
+    artists,
   };
   return <AppContext.Provider value={values}>{children}</AppContext.Provider>;
 }

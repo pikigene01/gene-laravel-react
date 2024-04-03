@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { AppContext } from "../providers/AppProvider";
 import { Link } from "react-router-dom";
 export default function Sidebar() {
-  const { logOut } = useContext(AppContext);
+  const { logOut, user } = useContext(AppContext);
   return (
     <aside className="bg-black dk nav-xs aside hidden-print" id="nav">
       <section className="vbox">
@@ -21,15 +21,15 @@ export default function Sidebar() {
                   Discover
                 </li>
                 <li>
-                  <Link to="/">
+                  <Link to="/albums">
                     <i className="icon-disc icon text-success"></i>
-                    <span className="font-bold">What's new</span>
+                    <span className="font-bold">Albums</span>
                   </Link>
                 </li>
                 <li>
-                  <Link to="/">
+                  <Link to="/songs">
                     <i className="icon-music-tone-alt icon text-info"></i>
-                    <span className="font-bold">Genres</span>
+                    <span className="font-bold">Songs</span>
                   </Link>
                 </li>
 
@@ -45,12 +45,18 @@ export default function Sidebar() {
             <div className="dropdown dropup wrapper-sm clearfix">
               <a href="#" className="dropdown-toggle" data-toggle="dropdown">
                 <span className="thumb-sm avatar pull-left m-l-xs">
-                  <img src="images/a3.png" className="dker" alt="..." />
+                  <img
+                    src={user?.avatar ?? "assets/images/a1.png"}
+                    className="dker"
+                    alt="..."
+                  />
                   <i className="on b-black"></i>
                 </span>
                 <span className="hidden-nav-xs clear">
                   <span className="block m-l">
-                    <strong className="font-bold text-lt">John.Smith</strong>
+                    <strong className="font-bold text-lt">
+                      {user?.name ?? ""}
+                    </strong>
                     <b className="caret"></b>
                   </span>
                   <span className="text-muted text-xs block m-l">
@@ -61,8 +67,8 @@ export default function Sidebar() {
               <ul className="dropdown-menu animated fadeInRight aside text-left">
                 <li className="divider"></li>
                 <li>
-                  <span onClick={() => logOut()} data-toggle="ajaxModal">
-                    Logout
+                  <span onClick={() => logOut()} style={{ cursor: "pointer" }}>
+                    {user ? "Logout" : "Please Login"}
                   </span>
                 </li>
               </ul>

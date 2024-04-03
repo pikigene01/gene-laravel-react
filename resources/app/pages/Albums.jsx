@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import { AppContext } from "../providers/AppProvider";
-export default function Home() {
-  const { user, songs } = React.useContext(AppContext);
+
+export default function Albums() {
+  const { searchResults } = useContext(AppContext);
   return (
     <section id="content">
       <section className="hbox stretch">
@@ -29,12 +30,7 @@ export default function Home() {
                 </span>
               </h2>
               <div className="row row-sm">
-                {songs?.length <= 0 && (
-                  <>
-                    <h2>Add Your Favourate Artists To See Them Here</h2>
-                  </>
-                )}
-                {songs?.map((song) => (
+                {searchResults?.map((song) => (
                   <div className="col-xs-6 col-sm-4 col-md-3 col-lg-2">
                     <div className="item">
                       <div className="pos-rlt">
@@ -88,23 +84,12 @@ export default function Home() {
                   </div>
                 ))}
               </div>
-
+              <div className="row">
+                <div className="col-md-7"></div>
+                <div className="col-md-5"></div>
+              </div>
               <div className="row m-t-lg m-b-lg">
-                <div className="col-sm-6">
-                  {!user && (
-                    <div className="bg-primary wrapper-md r">
-                      <a href="/login-google">
-                        <span className="h4 m-b-xs block">
-                          <i className="icon-user-follow i-lg"></i> Login or
-                          Create account
-                        </span>
-                        <span className="text-muted">
-                          Using Google To Start Creating Your Playlists
-                        </span>
-                      </a>
-                    </div>
-                  )}
-                </div>
+                <div className="col-sm-6"></div>
                 <div className="col-sm-6"></div>
               </div>
             </section>

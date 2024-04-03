@@ -1,6 +1,9 @@
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AppContext } from "../providers/AppProvider";
 
 export default function Header() {
+  const { handleSearch } = useContext(AppContext);
   return (
     <header className="bg-white-only header header-md navbar navbar-fixed-top-xs">
       <div className="navbar-header aside bg-info nav-xs">
@@ -52,6 +55,7 @@ export default function Header() {
             </span>
             <input
               type="text"
+              onChange={(e) => handleSearch(e)}
               className="form-control input-sm no-border rounded"
               placeholder="Search songs, albums..."
             />

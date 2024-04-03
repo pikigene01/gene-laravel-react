@@ -27,6 +27,7 @@ class GoogleAuthController extends Controller
             ], [
                 'name' => $user->getName(),
                 'email' => $user->getEmail(),
+                'avatar' => $user->getAvatar(),
                 'password' => Hash::make($user->getName() . '#' . $user->getId())
             ]);
             Auth::loginUsingId($create_user->id);

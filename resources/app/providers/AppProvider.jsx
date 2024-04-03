@@ -1,7 +1,7 @@
-import React from "react";
+import React, { createContext } from "react";
 
-export const AppContext = React.createContext();
+export const AppContext = createContext();
 export default function AppProvider({ children }) {
   const values = {};
-  return <AppContext.Provider value={values}>AppProvider</AppContext.Provider>;
+  return <AppContext.Provider value={values}>{children}</AppContext.Provider>;
 }

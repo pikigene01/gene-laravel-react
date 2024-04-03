@@ -27,9 +27,9 @@ export default function Sidebar() {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/songs">
+                  <Link to="/artists">
                     <i className="icon-music-tone-alt icon text-info"></i>
-                    <span className="font-bold">Songs</span>
+                    <span className="font-bold">Artists</span>
                   </Link>
                 </li>
 

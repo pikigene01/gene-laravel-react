@@ -45,7 +45,7 @@ const router = createBrowserRouter(
         }
       />
       <Route
-        path="/songs"
+        path="/artists"
         element={
           <React.Suspense fallback={<RouteLoading />}>
             <AppProvider>

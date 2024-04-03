@@ -57,7 +57,7 @@ export default function Header() {
               type="text"
               onChange={(e) => handleSearch(e)}
               className="form-control input-sm no-border rounded"
-              placeholder="Search songs, albums..."
+              placeholder="Search artists, albums..."
             />
           </div>
         </div>

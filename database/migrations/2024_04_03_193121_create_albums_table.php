@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('albums', function (Blueprint $table) {
             $table->id();
+            $table->unsignedSmallInteger('user_id')->nullable();
+            $table->string('name')->nullable();
+            $table->string('artist')->nullable();
+            $table->string('streamable')->nullable();
+            $table->string('listeners')->nullable();
+            $table->string('image')->nullable();
+            $table->string('url')->nullable();
             $table->timestamps();
         });
     }

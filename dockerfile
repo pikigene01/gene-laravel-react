@@ -2,8 +2,8 @@ From node:18-alpine
 
 WORKDIR /app
 
-COPY package.json .
-COPY composer.json .
+COPY package*.json .
+COPY composer*.json .
 
 RUN npm install
 RUN composer install

@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('play_lists', function (Blueprint $table) {
             $table->id();
+            $table->unsignedSmallInteger('user_id')->nullable();
+            $table->string('name')->nullable();
+            $table->string('image')->nullable();
+            $table->string('url')->nullable();
             $table->timestamps();
         });
     }

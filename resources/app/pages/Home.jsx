@@ -1,4 +1,7 @@
+import React from "react";
+import { AppContext } from "../providers/AppProvider";
 export default function Home() {
+  const { user } = React.useContext(AppContext);
   return (
     <section id="content">
       <section className="hbox stretch">
@@ -226,18 +229,17 @@ export default function Home() {
               </div>
               <div className="row m-t-lg m-b-lg">
                 <div className="col-sm-6">
-                  <div className="bg-primary wrapper-md r">
-                    <a href="#">
-                      <span className="h4 m-b-xs block">
-                        <i className="icon-user-follow i-lg"></i> Login or
-                        Create account
-                      </span>
-                      <span className="text-muted">
-                        Save and share your playlist with your friends when you
-                        log in or create an account.
-                      </span>
-                    </a>
-                  </div>
+                  {!user && (
+                    <div className="bg-primary wrapper-md r">
+                      <a href="/login-google">
+                        <span className="h4 m-b-xs block">
+                          <i className="icon-user-follow i-lg"></i> Login or
+                          Create account
+                        </span>
+                        <span className="text-muted">Using Google</span>
+                      </a>
+                    </div>
+                  )}
                 </div>
                 <div className="col-sm-6"></div>
               </div>
@@ -264,27 +266,6 @@ export default function Home() {
                 </li>
               </ul>
             </section>
-            <footer className="footer footer-md bg-black">
-              <form className="" role="search">
-                <div className="form-group clearfix m-b-none">
-                  <div className="input-group m-t m-b">
-                    <span className="input-group-btn">
-                      <button
-                        type="submit"
-                        className="btn btn-sm bg-empty text-muted btn-icon"
-                      >
-                        <i className="fa fa-search"></i>
-                      </button>
-                    </span>
-                    <input
-                      type="text"
-                      className="form-control input-sm text-white bg-empty b-b b-dark no-border"
-                      placeholder="Search members"
-                    />
-                  </div>
-                </div>
-              </form>
-            </footer>
           </section>
         </aside>
       </section>

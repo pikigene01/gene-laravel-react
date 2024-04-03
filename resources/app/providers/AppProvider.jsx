@@ -14,8 +14,17 @@ export default function AppProvider({ children }) {
     setSearchValue(e.target.value);
     navigate(`/search?q=${e.target.value}`);
   };
-
+  const logOut = () => {
+    setUser(false);
+  };
   useEffect(() => {}, []);
-  const values = { playLists, handleSearch, searchResults, navigate, user };
+  const values = {
+    playLists,
+    handleSearch,
+    searchResults,
+    navigate,
+    user,
+    logOut,
+  };
   return <AppContext.Provider value={values}>{children}</AppContext.Provider>;
 }

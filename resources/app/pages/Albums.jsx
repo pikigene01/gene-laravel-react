@@ -92,7 +92,7 @@ export default function Albums() {
                             </div>
                             <a href="#">
                               <img
-                                src={album?.image}
+                                src={album?.image ?? "/assets/images/a1.png"}
                                 alt=""
                                 className="r r-2x img-full"
                               />

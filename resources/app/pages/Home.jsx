@@ -82,7 +82,7 @@ export default function Home() {
                         </div>
                         <a href="#">
                           <img
-                            src={artist?.image}
+                            src={artist?.image ?? "/assets/images/a1.png"}
                             alt=""
                             className="r r-2x img-full"
                           />

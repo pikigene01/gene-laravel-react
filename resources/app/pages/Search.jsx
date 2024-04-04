@@ -5,6 +5,7 @@ export default function Search() {
   const {
     searchResults,
     albums,
+    artists,
     searchValue,
     removeFavourateAlbum,
     addFavourateAlbum,
@@ -63,6 +64,7 @@ export default function Search() {
                           <div className="bottom padder m-b-sm">
                             <a
                               href="#"
+                              title="Add this album to your favourates"
                               onClick={() => addFavourateAlbum(album)}
                             >
                               <i className="fa fa-plus-circle"></i>
@@ -104,20 +106,32 @@ export default function Search() {
         <aside className="aside-md bg-light dk" id="sidebar">
           <section class="vbox animated fadeInRight">
             <section class="w-f-md scrollable hover">
-              <h4 class="font-thin m-l-md m-t">Artists</h4>
+              <h4 class="font-thin m-l-md m-t">Fetched Artists</h4>
               <ul class="list-group no-bg no-borders auto m-t-n-xxs">
-                <li class="list-group-item">
-                  <span class="pull-left thumb-xs m-t-xs avatar m-l-xs m-r-sm">
-                    <img src="images/a1.png" alt="..." class="img-circle" />
-                    <i class="on b-light right sm"></i>
-                  </span>
-                  <div class="clear">
-                    <div>
-                      <a href="#">Chris Fox</a>
+                {artists?.map((artist) => (
+                  <li class="list-group-item">
+                    <span class="pull-left thumb-xs m-t-xs avatar m-l-xs m-r-sm">
+                      <img
+                        src={artist?.image[2]["#text"]}
+                        alt="..."
+                        class="img-circle"
+                      />
+                      <i class="on b-light right sm"></i>
+                    </span>
+                    <div class="clear">
+                      <div>
+                        <a href="#">{artist?.name}</a>
+                      </div>
+                      <small
+                        class="text-muted"
+                        style={{ cursor: "pointer" }}
+                        onClick={() => addFavourateArtist(artist)}
+                      >
+                        Add To Your Favourates
+                      </small>
                     </div>
-                    <small class="text-muted">New York</small>
-                  </div>
-                </li>
+                  </li>
+                ))}
               </ul>
             </section>
           </section>

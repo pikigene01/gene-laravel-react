@@ -63,6 +63,7 @@ export default function AppProvider({ children }) {
     if (response?.message) {
       if (response.status === 200) {
         setAlbumsFav(response?.albums);
+        navigate("/albums");
         swal("Success", response?.message, "success");
       } else {
         swal("Error", response?.message, "error");
@@ -95,6 +96,7 @@ export default function AppProvider({ children }) {
     if (response?.message) {
       if (response.status === 200) {
         setArtistsFav(response?.artists);
+        navigate("/");
         swal("Success", response?.message, "success");
       } else {
         swal("Error", response?.message, "error");

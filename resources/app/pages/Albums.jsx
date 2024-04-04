@@ -66,10 +66,11 @@ export default function Albums() {
                           <div className="bottom padder m-b-sm">
                             <a
                               href="#"
+                              title="Remove this album"
                               onClick={() => removeFavourateAlbum(album)}
                               className="pull-right"
                             >
-                              <i className="fa fa-delete">Delete</i>
+                              <i class="fa-solid fa-trash">Delete</i>
                             </a>
                           </div>
                         </div>

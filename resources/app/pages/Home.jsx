@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { AppContext } from "../providers/AppProvider";
 export default function Home() {
   const {
@@ -40,6 +41,10 @@ export default function Home() {
                 {artistsFav?.length <= 0 && (
                   <>
                     <h2>Add Your Favourate Artists To See Them Here</h2>
+                    <Link to="/search">
+                      {" "}
+                      <button className="btn btn-success">Add Artist</button>
+                    </Link>
                   </>
                 )}
                 {artistsFav?.map((artist) => (
@@ -67,16 +72,17 @@ export default function Home() {
                           <div className="bottom padder m-b-sm">
                             <a
                               href="#"
+                              title="Remove this artist"
                               onClick={() => removeFavourateArtist(artist)}
                               className="pull-right"
                             >
-                              <i className="fa fa-delete"></i>
+                              <i class="fa-solid fa-trash">Delete</i>
                             </a>
                           </div>
                         </div>
                         <a href="#">
                           <img
-                            src={artist?.name}
+                            src={artist?.image}
                             alt=""
                             className="r r-2x img-full"
                           />

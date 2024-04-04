@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\api\v1\ExampleController;
 use App\Http\Controllers\GoogleAuthController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,10 +18,10 @@ use Illuminate\Support\Facades\Route;
 
 // Authenticated API (sanctum)
 Route::group([
-    'middleware' => ['api_authenticated']
+    'middleware' => ['Auth:sanctum']
 ], function () {
 
-    Route::get('/example-authenticated', [ExampleController::class, 'authenticated']);
+    Route::post('/example-authenticated', [HomeController::class, "create"]);
 });
 
 // Public API

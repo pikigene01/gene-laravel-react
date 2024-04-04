@@ -8,6 +8,7 @@ import {
   apiDataPut,
 } from "../repository/base_repository";
 import axios from "axios";
+import swal from "sweetalert";
 
 export const AppContext = createContext(() => {});
 export default function AppProvider({ children }) {
@@ -18,7 +19,8 @@ export default function AppProvider({ children }) {
   const [user, setUser] = useLocalStorage("user", false);
   const [paramId, setParamId] = useState(0);
   const [searchResults, setSearchResults] = useLocalStorage("searched", []);
-  const [token, setToken] = useLocalStorage("token");
+  const [token, setToken] = useLocalStorage("token", null);
+  const [loading, setLoading] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const navigate = useNavigate();
 
@@ -34,7 +36,26 @@ export default function AppProvider({ children }) {
       return config;
     });
   }, [token]);
-
+  const projectRatingSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    let response = await apiDataPost(
+      "/api/v1/add/artist",
+      {
+        name: "",
+        url: "",
+        image: "",
+      }
+    );
+    if (response?.message) {
+      if (response.status === 200) {
+        swal("Success", response?.message, "success");
+      } else {
+        swal("Error", response?.message, "error");
+      }
+    }
+    setLoading(false);
+  };
   useEffect(() => {
     if (!searchValue) return;
     const getAllArtists = async () => {

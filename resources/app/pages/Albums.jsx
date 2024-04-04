@@ -8,6 +8,7 @@ export default function Albums() {
     albumsFav,
     removeFavourateAlbum,
     addFavourateAlbum,
+    user,
   } = useContext(AppContext);
   return (
     <section id="content">
@@ -36,66 +37,83 @@ export default function Albums() {
                 </span>
               </h2>
               <div className="row row-sm">
+                {!user && (
+                  <div className="bg-primary wrapper-md r">
+                    <a href="/login-google">
+                      <span className="h4 m-b-xs block">
+                        <i className="icon-user-follow i-lg"></i> Login or
+                        Create account
+                      </span>
+                      <span className="text-muted">
+                        Using Google To Start Creating Your Playlists
+                      </span>
+                    </a>
+                  </div>
+                )}
                 {albumsFav?.length <= 0 && (
                   <>
                     <h2>Add Your Favourate Albums To See Them Here</h2>
                   </>
                 )}
-                {albumsFav?.map((album) => (
-                  <div className="col-xs-6 col-sm-4 col-md-3 col-lg-2">
-                    <div className="item">
-                      <div className="pos-rlt">
-                        <div className="bottom">
-                          <span className="badge bg-info m-l-sm m-b-sm">
-                            {album?.name}
-                          </span>
-                        </div>
-                        <div className="item-overlay opacity r r-2x bg-black">
-                          <div className="text-info padder m-t-sm text-sm">
-                            <i className="fa fa-star"></i>
-                            <i className="fa fa-star"></i>
-                            <i className="fa fa-star"></i>
-                            <i className="fa fa-star"></i>
-                            <i className="fa fa-star-o text-muted"></i>
-                          </div>
-                          <div className="center text-center m-t-n">
+                {user && (
+                  <>
+                    {albumsFav?.map((album) => (
+                      <div className="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+                        <div className="item">
+                          <div className="pos-rlt">
+                            <div className="bottom">
+                              <span className="badge bg-info m-l-sm m-b-sm">
+                                {album?.name}
+                              </span>
+                            </div>
+                            <div className="item-overlay opacity r r-2x bg-black">
+                              <div className="text-info padder m-t-sm text-sm">
+                                <i className="fa fa-star"></i>
+                                <i className="fa fa-star"></i>
+                                <i className="fa fa-star"></i>
+                                <i className="fa fa-star"></i>
+                                <i className="fa fa-star-o text-muted"></i>
+                              </div>
+                              <div className="center text-center m-t-n">
+                                <a href="#">
+                                  <i className="icon-control-play i-2x"></i>
+                                </a>
+                              </div>
+                              <div className="bottom padder m-b-sm">
+                                <a
+                                  href="#"
+                                  title="Remove this album"
+                                  onClick={() => removeFavourateAlbum(album)}
+                                  className="pull-right"
+                                >
+                                  <i class="fa-solid fa-trash">Delete</i>
+                                </a>
+                              </div>
+                            </div>
                             <a href="#">
-                              <i className="icon-control-play i-2x"></i>
+                              <img
+                                src={album?.image}
+                                alt=""
+                                className="r r-2x img-full"
+                              />
                             </a>
                           </div>
-                          <div className="bottom padder m-b-sm">
+                          <div className="padder-v">
+                            <a href="#" className="text-ellipsis">
+                              {album?.name}
+                            </a>
                             <a
                               href="#"
-                              title="Remove this album"
-                              onClick={() => removeFavourateAlbum(album)}
-                              className="pull-right"
+                              className="text-ellipsis text-xs text-muted"
                             >
-                              <i class="fa-solid fa-trash">Delete</i>
+                              {""}
                             </a>
                           </div>
                         </div>
-                        <a href="#">
-                          <img
-                            src={album?.image}
-                            alt=""
-                            className="r r-2x img-full"
-                          />
-                        </a>
                       </div>
-                      <div className="padder-v">
-                        <a href="#" className="text-ellipsis">
-                          {album?.name}
-                        </a>
-                        <a
-                          href="#"
-                          className="text-ellipsis text-xs text-muted"
-                        >
-                          {""}
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                ))}
+                    ))}
+                  </>
+                )}
               </div>
               <div className="row">
                 <div className="col-md-7"></div>

@@ -39,6 +39,10 @@ export default function AppProvider({ children }) {
     });
   }, [token]);
   const removeFavourateAlbum = async (album) => {
+    if (!user) {
+      swal("Error", "You are not authorized to perform this action", "error");
+      return;
+    }
     setLoading(true);
     let response = await apiDataPost("/api/v1/remove-album", {
       id: album?.id,
@@ -54,6 +58,10 @@ export default function AppProvider({ children }) {
     setLoading(false);
   };
   const addFavourateAlbum = async (album) => {
+    if (!user) {
+      swal("Error", "You are not authorized to perform this action", "error");
+      return;
+    }
     setLoading(true);
     let response = await apiDataPost("/api/v1/add-album", {
       name: album?.name,
@@ -72,6 +80,10 @@ export default function AppProvider({ children }) {
     setLoading(false);
   };
   const removeFavourateArtist = async (artist) => {
+    if (!user) {
+      swal("Error", "You are not authorized to perform this action", "error");
+      return;
+    }
     setLoading(true);
     let response = await apiDataPost("/api/v1/remove-artist", {
       id: artist?.id,
@@ -87,6 +99,10 @@ export default function AppProvider({ children }) {
     setLoading(false);
   };
   const addFavourateArtist = async (artist) => {
+    if (!user) {
+      swal("Error", "You are not authorized to perform this action", "error");
+      return;
+    }
     setLoading(true);
     let response = await apiDataPost("/api/v1/add-artist", {
       name: artist?.name,
@@ -184,7 +200,7 @@ export default function AppProvider({ children }) {
     }
   }, [navigate]);
   const logOut = () => {
-    setToken(null);
+    setToken(false);
     setUser(false);
   };
   useEffect(() => {}, []);

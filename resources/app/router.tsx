@@ -45,6 +45,16 @@ const router = createBrowserRouter(
         }
       />
       <Route
+        path="/home/:token"
+        element={
+          <React.Suspense fallback={<RouteLoading />}>
+            <AppProvider>
+              <Home />
+            </AppProvider>
+          </React.Suspense>
+        }
+      />
+      <Route
         path="/artists"
         element={
           <React.Suspense fallback={<RouteLoading />}>

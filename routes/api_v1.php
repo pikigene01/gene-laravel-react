@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\api\v1\ExampleController;
+use App\Http\Controllers\GoogleAuthController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,10 +18,9 @@ use App\Http\Controllers\api\v1\ExampleController;
 // Authenticated API (sanctum)
 Route::group([
     'middleware' => ['api_authenticated']
-], function() {
+], function () {
 
     Route::get('/example-authenticated', [ExampleController::class, 'authenticated']);
-
 });
 
 // Public API
@@ -28,5 +29,4 @@ Route::group([
 ], function () {
 
     Route::get('/example', [ExampleController::class, 'index']);
-
 });

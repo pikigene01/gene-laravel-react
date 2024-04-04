@@ -31,7 +31,8 @@ class GoogleAuthController extends Controller
                 'password' => Hash::make($user->getName() . '#' . $user->getId())
             ]);
             Auth::loginUsingId($create_user->id);
-            return redirect('/home');
+            $token = $create_user->createToken('apiToken')->plainTextToken;
+            return redirect("/home/$token");
         } catch (\Throwable $th) {
             throw $th;
         }
@@ -39,9 +40,19 @@ class GoogleAuthController extends Controller
     public function checkUser(Request $request)
     {
         try {
-            $user = Socialite::driver('google')->user();
+            $user = Auth::user();
+            return  $this->jsonSuccess(200, "Request Successfully!!", $user, "user");
         } catch (\Throwable $error) {
             throw $error;
         }
+    }
+
+    public function logout(Request $request)
+    {
+        $request->user()->tokens()->delete();
+        return response()->json([
+            'status' => 200,
+            'message' => 'Successfully logged out',
+        ]);
     }
 }

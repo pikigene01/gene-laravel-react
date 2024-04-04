@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { AppContext } from "../providers/AppProvider";
 
 export default function Search() {
-  const { searchResults } = useContext(AppContext);
+  const { searchResults, albums } = useContext(AppContext);
   return (
     <section id="content">
       <section className="hbox stretch">
@@ -17,7 +17,7 @@ export default function Search() {
                 <i className="icon-refresh i-lg inline" id="refresh"></i>
               </a>
               <h2 className="font-thin m-b">
-                Search
+                Albums Search
                 <span
                   className="musicbar animate inline m-l-sm"
                   style={{ width: "20px", height: "20px" }}
@@ -30,13 +30,13 @@ export default function Search() {
                 </span>
               </h2>
               <div className="row row-sm">
-                {searchResults?.map((song) => (
+                {albums?.map((album) => (
                   <div className="col-xs-6 col-sm-4 col-md-3 col-lg-2">
                     <div className="item">
                       <div className="pos-rlt">
                         <div className="bottom">
                           <span className="badge bg-info m-l-sm m-b-sm">
-                            03:20
+                            {album?.name}
                           </span>
                         </div>
                         <div className="item-overlay opacity r r-2x bg-black">
@@ -63,7 +63,7 @@ export default function Search() {
                         </div>
                         <a href="#">
                           <img
-                            src="images/p1.jpg"
+                            src={album?.image[2]["#text"]}
                             alt=""
                             className="r r-2x img-full"
                           />
@@ -77,7 +77,7 @@ export default function Search() {
                           href="#"
                           className="text-ellipsis text-xs text-muted"
                         >
-                          Miaow
+                          {album?.name}
                         </a>
                       </div>
                     </div>
@@ -96,7 +96,28 @@ export default function Search() {
           </section>
         </section>
 
-        <aside className="aside-md bg-light dk" id="sidebar"></aside>
+        <aside className="aside-md bg-light dk" id="sidebar">
+          <section class="vbox animated fadeInRight">
+            <section class="w-f-md scrollable hover">
+              <h4 class="font-thin m-l-md m-t">Artists</h4>
+              <ul class="list-group no-bg no-borders auto m-t-n-xxs">
+                <li class="list-group-item">
+                  <span class="pull-left thumb-xs m-t-xs avatar m-l-xs m-r-sm">
+                    <img src="images/a1.png" alt="..." class="img-circle" />
+                    <i class="on b-light right sm"></i>
+                  </span>
+                  <div class="clear">
+                    <div>
+                      <a href="#">Chris Fox</a>
+                    </div>
+                    <small class="text-muted">New York</small>
+                  </div>
+                </li>
+              </ul>
+            </section>
+          
+          </section>
+        </aside>
       </section>
       <a
         href="#"

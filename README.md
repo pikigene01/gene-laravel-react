@@ -1,4 +1,4 @@
-# Gene Piki Laravel + React 
+# Gene Piki Laravel + React Music App
 
 Back-end 
 - [x] Laravel 10 + PHP 8

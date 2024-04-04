@@ -36,7 +36,9 @@ Preview production build
 ```
 npm run production
 ``` 
-
+Inside your .emv file make sure you have google keys
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
 ---
 
 ### Routes 

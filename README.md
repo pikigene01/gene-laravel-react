@@ -1,4 +1,4 @@
-# Laravel + React 
+# Gene Piki Laravel + React 
 
 Back-end 
 - [x] Laravel 10 + PHP 8

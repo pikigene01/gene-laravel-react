@@ -13,11 +13,13 @@ export default function ArtistView() {
             <div className="blog-post">
               <div className="post-item">
                 <div className="post-media">
-                  {/* <img
-                    src={artistToView?.image[3]["#text"] ?? ""}
+                  <img
+                    src={
+                      artistToView?.image ? artistToView?.image[3]["#text"] : ""
+                    }
                     className="img-full"
                     style={{ height: "40vh" }}
-                  /> */}
+                  />
                 </div>
                 <div className="caption wrapper-lg">
                   <h2 className="post-title">

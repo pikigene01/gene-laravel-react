@@ -65,9 +65,9 @@ export default function Home() {
                             <i className="fa fa-star-o text-muted"></i>
                           </div>
                           <div className="center text-center m-t-n">
-                            <a href="#">
+                            <Link to={"/artist/view/" + artist?.name}>
                               <i className="icon-control-play i-2x"></i>
-                            </a>
+                            </Link>
                           </div>
                           <div className="bottom padder m-b-sm">
                             <a

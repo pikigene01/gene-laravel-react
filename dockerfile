@@ -13,3 +13,5 @@ COPY . .
 EXPOSE 8000
 
 CMD ["npm", "run dev"]
+
+CMD ["cp", ".env.example .env"]

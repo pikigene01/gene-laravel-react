@@ -20,6 +20,7 @@ export default function AppProvider({ children }) {
   const [albumsFav, setAlbumsFav] = useLocalStorage("albums_fav", []);
   const [user, setUser] = useLocalStorage("user", false);
   const [paramId, setParamId] = useState(0);
+  const [artistToView, setArtistToView] = useState({});
   const [searchResults, setSearchResults] = useLocalStorage("searched", []);
   const [token, setToken] = useLocalStorage("token", null);
   const [loading, setLoading] = useState(false);
@@ -142,7 +143,9 @@ export default function AppProvider({ children }) {
     if (!searchValue) return;
     const getAllArtists = async () => {
       let response = await apiDataGet(
-        `https://ws.audioscrobbler.com/2.0/?method=artist.search&artist=${searchValue}&api_key=8969de130336f865af90992ab5165dc4&format=json`,
+        `https://ws.audioscrobbler.com/2.0/?method=artist.search&artist=${searchValue}&api_key=${
+          import.meta.env.VITE_AUDIO_API_KEY
+        }&format=json`,
         {},
         token
       );
@@ -152,7 +155,9 @@ export default function AppProvider({ children }) {
     };
     const getAllAlbums = async () => {
       let response = await apiDataGet(
-        `https://ws.audioscrobbler.com/2.0/?method=album.search&album=${searchValue}&api_key=8969de130336f865af90992ab5165dc4&format=json`,
+        `https://ws.audioscrobbler.com/2.0/?method=album.search&album=${searchValue}&api_key=${
+          import.meta.env.VITE_AUDIO_API_KEY
+        }&format=json`,
         {},
         token
       );
@@ -199,6 +204,29 @@ export default function AppProvider({ children }) {
       setToken(param_id);
     }
   }, [navigate]);
+  useEffect(() => {
+    if (window.location.pathname.toString().includes("/artist/view/")) {
+      const url = window.location.pathname;
+      const param_id = url.substring(url.lastIndexOf("/") + 1);
+      const decodedString = decodeURIComponent(param_id);
+      const values = decodedString.split(",");
+
+      // Extracting the value "name"
+      const name = values[0];
+      var api_key = import.meta.env.VITE_AUDIO_API_KEY;
+
+      const fetchArtistData = async () => {
+        let response = await apiDataGet(
+          `https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${name}&api_key=${api_key}&format=json`,
+          {}
+        );
+        if (response?.artist) {
+          setArtistToView(response?.artist);
+        }
+      };
+      fetchArtistData();
+    }
+  }, [navigate]);
   const logOut = () => {
     setToken(false);
     setUser(false);
@@ -222,6 +250,7 @@ export default function AppProvider({ children }) {
     albumsFav,
     removeFavourateArtist,
     addFavourateArtist,
+    artistToView,
   };
   return <AppContext.Provider value={values}>{children}</AppContext.Provider>;
 }

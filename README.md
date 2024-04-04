@@ -26,6 +26,10 @@ Install dependencies
 ```
 composer install && npm install
 ``` 
+Migrate Database For Saving Artist And Albums to profile 
+```
+php artisan migrate
+``` 
 
 Run Laravel and React dev server concurrently
 ```

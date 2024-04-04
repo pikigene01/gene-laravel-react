@@ -22,11 +22,6 @@ export default function ArtistView() {
                   />
                 </div>
                 <div className="caption wrapper-lg">
-                  <h2 className="post-title">
-                    <a href="#">
-                      7 things you need to know about the flat design
-                    </a>
-                  </h2>
                   <div className="post-sum">
                     <p>{htmlParser(artistToView?.bio?.summary)}</p>
                   </div>

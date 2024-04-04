@@ -2,7 +2,13 @@ import React, { useContext } from "react";
 import { AppContext } from "../providers/AppProvider";
 
 export default function Search() {
-  const { searchResults, albums, searchValue } = useContext(AppContext);
+  const {
+    searchResults,
+    albums,
+    searchValue,
+    removeFavourateAlbum,
+    addFavourateAlbum,
+  } = useContext(AppContext);
   return (
     <section id="content">
       <section className="hbox stretch">
@@ -53,10 +59,17 @@ export default function Search() {
                             </a>
                           </div>
                           <div className="bottom padder m-b-sm">
-                            <a href="#" className="pull-right">
-                              <i className="fa fa-heart-o"></i>
+                            <a
+                              href="#"
+                              onClick={() => removeFavourateAlbum(album)}
+                              className="pull-right"
+                            >
+                              <i className="fa fa-delete"></i>
                             </a>
-                            <a href="#">
+                            <a
+                              href="#"
+                              onClick={() => addFavourateAlbum(album)}
+                            >
                               <i className="fa fa-plus-circle"></i>
                             </a>
                           </div>
@@ -70,9 +83,6 @@ export default function Search() {
                         </a>
                       </div>
                       <div className="padder-v">
-                        <a href="#" className="text-ellipsis">
-                          Tempered Song
-                        </a>
                         <a
                           href="#"
                           className="text-ellipsis text-xs text-muted"
@@ -115,7 +125,6 @@ export default function Search() {
                 </li>
               </ul>
             </section>
-          
           </section>
         </aside>
       </section>

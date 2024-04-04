@@ -1,7 +1,7 @@
 import React from "react";
 import { AppContext } from "../providers/AppProvider";
 export default function Home() {
-  const { user, songs } = React.useContext(AppContext);
+  const { user, songs, token } = React.useContext(AppContext);
   return (
     <section id="content">
       <section className="hbox stretch">
@@ -91,7 +91,7 @@ export default function Home() {
 
               <div className="row m-t-lg m-b-lg">
                 <div className="col-sm-6">
-                  {!user && (
+                  {!token && (
                     <div className="bg-primary wrapper-md r">
                       <a href="/login-google">
                         <span className="h4 m-b-xs block">

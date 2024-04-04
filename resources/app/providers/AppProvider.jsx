@@ -36,17 +36,20 @@ export default function AppProvider({ children }) {
       return config;
     });
   }, [token]);
+  const removeFavourateAlbum = async (album) => {
+    alert("hey");
+  };
+  const addFavourateAlbum = async (album) => {
+    alert("hey");
+  };
   const projectRatingSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    let response = await apiDataPost(
-      "/api/v1/add/artist",
-      {
-        name: "",
-        url: "",
-        image: "",
-      }
-    );
+    let response = await apiDataPost("/api/v1/add/artist", {
+      name: "",
+      url: "",
+      image: "",
+    });
     if (response?.message) {
       if (response.status === 200) {
         swal("Success", response?.message, "success");
@@ -84,6 +87,19 @@ export default function AppProvider({ children }) {
   }, [searchValue]);
 
   useEffect(() => {
+    if (!token) return;
+    async function fetchData() {
+      let response = await apiDataGet("/api/v1/check-user", {});
+      if (response?.user) {
+        setUser(response?.user);
+      } else {
+        swal("Error", response?.message, "error");
+      }
+    }
+    fetchData();
+  }, [token]);
+
+  useEffect(() => {
     if (window.location.pathname.toString().includes("/home/")) {
       const url = window.location.pathname;
       const param_id = url.substring(url.lastIndexOf("/") + 1);
@@ -93,6 +109,7 @@ export default function AppProvider({ children }) {
     }
   }, [navigate]);
   const logOut = () => {
+    setToken(null);
     setUser(false);
   };
   useEffect(() => {}, []);
@@ -108,6 +125,8 @@ export default function AppProvider({ children }) {
     albums,
     token,
     searchValue,
+    removeFavourateAlbum,
+    addFavourateAlbum,
   };
   return <AppContext.Provider value={values}>{children}</AppContext.Provider>;
 }

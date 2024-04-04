@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 import Header from "../components/Header";
 import Sidebar from "@/components/Sidebar";
 
-export default function RootLayout(props: { children?: ReactNode }) {
+export default function RootLayout({ children }) {
   return (
     <main className="p-4">
       <section className="vbox">
@@ -11,8 +11,7 @@ export default function RootLayout(props: { children?: ReactNode }) {
         <section>
           <section className="hbox stretch">
             <Sidebar />
-            {props.children}
-
+            {children}
             <Outlet />
           </section>
         </section>

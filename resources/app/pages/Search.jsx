@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { AppContext } from "../providers/AppProvider";
 
 export default function Search() {
-  const { searchResults, albums } = useContext(AppContext);
+  const { searchResults, albums, searchValue } = useContext(AppContext);
   return (
     <section id="content">
       <section className="hbox stretch">
@@ -17,7 +17,7 @@ export default function Search() {
                 <i className="icon-refresh i-lg inline" id="refresh"></i>
               </a>
               <h2 className="font-thin m-b">
-                Albums Search
+                Albums Search {searchValue}
                 <span
                   className="musicbar animate inline m-l-sm"
                   style={{ width: "20px", height: "20px" }}

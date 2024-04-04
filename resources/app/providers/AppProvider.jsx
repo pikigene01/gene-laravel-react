@@ -9,7 +9,7 @@ import {
 } from "../repository/base_repository";
 import axios from "axios";
 
-export const AppContext = createContext();
+export const AppContext = createContext(()=>{});
 export default function AppProvider({ children }) {
   const [playLists, setPlayLists] = useLocalStorage("playlists", []);
   const [songs, setSongs] = useLocalStorage("songs", []);
@@ -75,6 +75,7 @@ export default function AppProvider({ children }) {
     artists,
     albums,
     token,
+    searchValue,
   };
   return <AppContext.Provider value={values}>{children}</AppContext.Provider>;
 }

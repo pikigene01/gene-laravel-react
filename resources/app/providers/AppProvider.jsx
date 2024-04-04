@@ -16,6 +16,8 @@ export default function AppProvider({ children }) {
   const [songs, setSongs] = useLocalStorage("songs", []);
   const [artists, setArtists] = useLocalStorage("artists", []);
   const [albums, setAlbums] = useLocalStorage("albums", []);
+  const [artistsFav, setArtistsFav] = useLocalStorage("artists_fav", []);
+  const [albumsFav, setAlbumsFav] = useLocalStorage("albums_fav", []);
   const [user, setUser] = useLocalStorage("user", false);
   const [paramId, setParamId] = useState(0);
   const [searchResults, setSearchResults] = useLocalStorage("searched", []);
@@ -37,21 +39,80 @@ export default function AppProvider({ children }) {
     });
   }, [token]);
   const removeFavourateAlbum = async (album) => {
-    alert("hey");
+    setLoading(true);
+    let response = await apiDataPost("/api/v1/remove-album", {
+      id: album?.id,
+    });
+    if (response?.message) {
+      if (response.status === 200) {
+        setAlbumsFav(response?.albums);
+        swal("Success", response?.message, "success");
+      } else {
+        swal("Error", response?.message, "error");
+      }
+    }
+    setLoading(false);
   };
   const addFavourateAlbum = async (album) => {
-    alert("hey");
+    setLoading(true);
+    let response = await apiDataPost("/api/v1/add-album", {
+      name: album?.name,
+      url: album?.url,
+      image: album?.image[2]["#text"],
+    });
+    if (response?.message) {
+      if (response.status === 200) {
+        setAlbumsFav(response?.albums);
+        swal("Success", response?.message, "success");
+      } else {
+        swal("Error", response?.message, "error");
+      }
+    }
+    setLoading(false);
+  };
+  const removeFavourateArtist = async (artist) => {
+    setLoading(true);
+    let response = await apiDataPost("/api/v1/remove-artist", {
+      id: artist?.id,
+    });
+    if (response?.message) {
+      if (response.status === 200) {
+        setArtistsFav(response?.artists);
+        swal("Success", response?.message, "success");
+      } else {
+        swal("Error", response?.message, "error");
+      }
+    }
+    setLoading(false);
+  };
+  const addFavourateArtist = async (artist) => {
+    setLoading(true);
+    let response = await apiDataPost("/api/v1/add-artist", {
+      name: artist?.name,
+      url: artist?.url,
+      image: artist?.image[2]["#text"],
+    });
+    if (response?.message) {
+      if (response.status === 200) {
+        setArtistsFav(response?.artists);
+        swal("Success", response?.message, "success");
+      } else {
+        swal("Error", response?.message, "error");
+      }
+    }
+    setLoading(false);
   };
   const projectRatingSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    let response = await apiDataPost("/api/v1/add/artist", {
+    let response = await apiDataPost("/api/v1/add-artist", {
       name: "",
       url: "",
       image: "",
     });
     if (response?.message) {
       if (response.status === 200) {
+        setArtistsFav(response?.artists);
         swal("Success", response?.message, "success");
       } else {
         swal("Error", response?.message, "error");
@@ -86,6 +147,18 @@ export default function AppProvider({ children }) {
     getAllArtists();
   }, [searchValue]);
 
+  useEffect(() => {
+    if (!token) return;
+    async function fetchData() {
+      let response = await apiDataGet("/api/v1/fetch-data", {});
+      if (response?.data?.albums) {
+        setAlbumsFav(response?.data?.albums);
+      } else if (response?.data?.artists) {
+        setArtistsFav(response?.data?.artists);
+      }
+    }
+    fetchData();
+  }, [token]);
   useEffect(() => {
     if (!token) return;
     async function fetchData() {
@@ -127,6 +200,10 @@ export default function AppProvider({ children }) {
     searchValue,
     removeFavourateAlbum,
     addFavourateAlbum,
+    artistsFav,
+    albumsFav,
+    removeFavourateArtist,
+    addFavourateArtist,
   };
   return <AppContext.Provider value={values}>{children}</AppContext.Provider>;
 }

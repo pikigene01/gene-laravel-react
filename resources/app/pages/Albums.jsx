@@ -2,7 +2,13 @@ import React, { useContext } from "react";
 import { AppContext } from "../providers/AppProvider";
 
 export default function Albums() {
-  const { searchResults } = useContext(AppContext);
+  const {
+    searchResults,
+    artistsFav,
+    albumsFav,
+    removeFavourateAlbum,
+    addFavourateAlbum,
+  } = useContext(AppContext);
   return (
     <section id="content">
       <section className="hbox stretch">
@@ -30,13 +36,18 @@ export default function Albums() {
                 </span>
               </h2>
               <div className="row row-sm">
-                {searchResults?.map((song) => (
+                {albumsFav?.length <= 0 && (
+                  <>
+                    <h2>Add Your Favourate Albums To See Them Here</h2>
+                  </>
+                )}
+                {albumsFav?.map((album) => (
                   <div className="col-xs-6 col-sm-4 col-md-3 col-lg-2">
                     <div className="item">
                       <div className="pos-rlt">
                         <div className="bottom">
                           <span className="badge bg-info m-l-sm m-b-sm">
-                            03:20
+                            {album?.name}
                           </span>
                         </div>
                         <div className="item-overlay opacity r r-2x bg-black">
@@ -53,17 +64,18 @@ export default function Albums() {
                             </a>
                           </div>
                           <div className="bottom padder m-b-sm">
-                            <a href="#" className="pull-right">
-                              <i className="fa fa-heart-o"></i>
-                            </a>
-                            <a href="#">
-                              <i className="fa fa-plus-circle"></i>
+                            <a
+                              href="#"
+                              onClick={() => removeFavourateAlbum(album)}
+                              className="pull-right"
+                            >
+                              <i className="fa fa-delete"></i>
                             </a>
                           </div>
                         </div>
                         <a href="#">
                           <img
-                            src="images/p1.jpg"
+                            src={album?.image}
                             alt=""
                             className="r r-2x img-full"
                           />
@@ -71,13 +83,13 @@ export default function Albums() {
                       </div>
                       <div className="padder-v">
                         <a href="#" className="text-ellipsis">
-                          Tempered Song
+                          {album?.name}
                         </a>
                         <a
                           href="#"
                           className="text-ellipsis text-xs text-muted"
                         >
-                          Miaow
+                          {""}
                         </a>
                       </div>
                     </div>

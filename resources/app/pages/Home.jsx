@@ -1,7 +1,15 @@
 import React from "react";
 import { AppContext } from "../providers/AppProvider";
 export default function Home() {
-  const { user, songs, token } = React.useContext(AppContext);
+  const {
+    user,
+    songs,
+    token,
+    artistsFav,
+    albumsFav,
+    removeFavourateArtist,
+    addFavourateArtist,
+  } = React.useContext(AppContext);
   return (
     <section id="content">
       <section className="hbox stretch">
@@ -16,7 +24,7 @@ export default function Home() {
                 <i className="icon-refresh i-lg inline" id="refresh"></i>
               </a>
               <h2 className="font-thin m-b">
-                Albums
+                Your Favourates Artists
                 <span
                   className="musicbar animate inline m-l-sm"
                   style={{ width: "20px", height: "20px" }}
@@ -29,18 +37,18 @@ export default function Home() {
                 </span>
               </h2>
               <div className="row row-sm">
-                {songs?.length <= 0 && (
+                {artistsFav?.length <= 0 && (
                   <>
                     <h2>Add Your Favourate Artists To See Them Here</h2>
                   </>
                 )}
-                {songs?.map((song) => (
+                {artistsFav?.map((artist) => (
                   <div className="col-xs-6 col-sm-4 col-md-3 col-lg-2">
                     <div className="item">
                       <div className="pos-rlt">
                         <div className="bottom">
                           <span className="badge bg-info m-l-sm m-b-sm">
-                            03:20
+                            {artist?.name}
                           </span>
                         </div>
                         <div className="item-overlay opacity r r-2x bg-black">
@@ -57,17 +65,18 @@ export default function Home() {
                             </a>
                           </div>
                           <div className="bottom padder m-b-sm">
-                            <a href="#" className="pull-right">
-                              <i className="fa fa-heart-o"></i>
-                            </a>
-                            <a href="#">
-                              <i className="fa fa-plus-circle"></i>
+                            <a
+                              href="#"
+                              onClick={() => removeFavourateArtist(artist)}
+                              className="pull-right"
+                            >
+                              <i className="fa fa-delete"></i>
                             </a>
                           </div>
                         </div>
                         <a href="#">
                           <img
-                            src="images/p1.jpg"
+                            src={artist?.name}
                             alt=""
                             className="r r-2x img-full"
                           />
@@ -75,13 +84,13 @@ export default function Home() {
                       </div>
                       <div className="padder-v">
                         <a href="#" className="text-ellipsis">
-                          Tempered Song
+                          {artist?.name}
                         </a>
                         <a
                           href="#"
                           className="text-ellipsis text-xs text-muted"
                         >
-                          Miaow
+                          {""}
                         </a>
                       </div>
                     </div>

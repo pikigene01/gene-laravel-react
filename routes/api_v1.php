@@ -19,5 +19,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['middeware' => 'auth:sanctum'], function () {
     Route::post('/example-authenticated', [HomeController::class, "create"]);
+    Route::get('/fetch-data', [HomeController::class, "index"]);
+    Route::post('/add-artist', [HomeController::class, "createArtist"]);
+    Route::post('/add-album', [HomeController::class, "createAlbum"]);
+    Route::post('/remove-album', [HomeController::class, "removeAlbum"]);
+    Route::post('/remove-artist', [HomeController::class, "removeArtist"]);
     Route::get('/check-user', [GoogleAuthController::class, "checkUser"]);
 });

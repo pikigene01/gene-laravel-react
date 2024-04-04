@@ -8,6 +8,8 @@ export default function Search() {
     searchValue,
     removeFavourateAlbum,
     addFavourateAlbum,
+    removeFavourateArtist,
+    addFavourateArtist,
   } = useContext(AppContext);
   return (
     <section id="content">
@@ -59,13 +61,6 @@ export default function Search() {
                             </a>
                           </div>
                           <div className="bottom padder m-b-sm">
-                            <a
-                              href="#"
-                              onClick={() => removeFavourateAlbum(album)}
-                              className="pull-right"
-                            >
-                              <i className="fa fa-delete"></i>
-                            </a>
                             <a
                               href="#"
                               onClick={() => addFavourateAlbum(album)}

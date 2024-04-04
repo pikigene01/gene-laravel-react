@@ -46,7 +46,7 @@ export default function Sidebar() {
               <a href="#" className="dropdown-toggle" data-toggle="dropdown">
                 <span className="thumb-sm avatar pull-left m-l-xs">
                   <img
-                    src={user?.avatar ?? "assets/images/a1.png"}
+                    src={user?.avatar ?? "/assets/images/a1.png"}
                     className="dker"
                     alt="..."
                   />

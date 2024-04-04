@@ -72,7 +72,7 @@ export default function Header() {
               data-toggle="dropdown"
             >
               <span className="thumb-sm avatar pull-right m-t-n-sm m-b-n-sm m-l-sm">
-                <img src={user?.avatar ?? "assets/images/a1.png"} alt="..." />
+                <img src={user?.avatar ?? "/assets/images/a1.png"} alt="..." />
               </span>
               {user?.name ?? ""} <b className="caret"></b>
             </a>

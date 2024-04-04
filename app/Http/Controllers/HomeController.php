@@ -37,7 +37,7 @@ class HomeController extends Controller
         $createArtists->save();
         $artists = Artist::where('user_id', $user_id)->get();
         $albums = Album::where('user_id', $user_id)->get();
-        return  $this->jsonSuccess(200, "Request Successfully!!", $artists, "artists");
+        return  $this->jsonSuccess(200, "Artist Added Successfully!!", $artists, "artists");
     }
     public function createAlbum(Request $request)
     {
@@ -51,23 +51,23 @@ class HomeController extends Controller
         $createAlbum->image = $request->image;
         $createAlbum->save();
         $albums = Album::where('user_id', $user_id)->get();
-        return  $this->jsonSuccess(200, "Request Successfully!!", $albums, "albums");
+        return  $this->jsonSuccess(200, "Album Added Successfully!!", $albums, "albums");
     }
-    public function removeArtist(Request $request)
+    public function removeAlbum(Request $request)
     {
         $user_id = Auth::user()->id;
         $album_remove = Album::where('user_id', $user_id)->where('id', $request->id)->delete();
 
         $albums = Album::where('user_id', $user_id)->get();
-        return  $this->jsonSuccess(200, "Request Successfully!!", $albums, "albums");
+        return  $this->jsonSuccess(200, "Album Successfully Deleted!!", $albums, "albums");
     }
-    public function removeAlbum(Request $request)
+    public function removeArtist(Request $request)
     {
         $user_id = Auth::user()->id;
         $artist_remove = Artist::where('user_id', $user_id)->where('id', $request->id)->delete();
 
         $artists = Artist::where('user_id', $user_id)->get();
-        return  $this->jsonSuccess(200, "Request Successfully!!", $artists, "artists");
+        return  $this->jsonSuccess(200, "Artist Deleted Successfully!!", $artists, "artists");
     }
 
     /**

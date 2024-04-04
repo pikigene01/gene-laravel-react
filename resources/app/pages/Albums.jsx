@@ -69,7 +69,7 @@ export default function Albums() {
                               onClick={() => removeFavourateAlbum(album)}
                               className="pull-right"
                             >
-                              <i className="fa fa-delete"></i>
+                              <i className="fa fa-delete">Delete</i>
                             </a>
                           </div>
                         </div>

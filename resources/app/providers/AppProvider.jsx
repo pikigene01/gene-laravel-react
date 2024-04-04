@@ -9,13 +9,14 @@ import {
 } from "../repository/base_repository";
 import axios from "axios";
 
-export const AppContext = createContext(()=>{});
+export const AppContext = createContext(() => {});
 export default function AppProvider({ children }) {
   const [playLists, setPlayLists] = useLocalStorage("playlists", []);
   const [songs, setSongs] = useLocalStorage("songs", []);
   const [artists, setArtists] = useLocalStorage("artists", []);
   const [albums, setAlbums] = useLocalStorage("albums", []);
   const [user, setUser] = useLocalStorage("user", false);
+  const [paramId, setParamId] = useState(0);
   const [searchResults, setSearchResults] = useLocalStorage("searched", []);
   const [token, setToken] = useLocalStorage("token");
   const [searchValue, setSearchValue] = useState("");
@@ -60,6 +61,16 @@ export default function AppProvider({ children }) {
     getAllAlbums();
     getAllArtists();
   }, [searchValue]);
+
+  useEffect(() => {
+    if (window.location.pathname.toString().includes("/home/")) {
+      const url = window.location.pathname;
+      const param_id = url.substring(url.lastIndexOf("/") + 1);
+
+      setParamId(param_id);
+      setToken(param_id);
+    }
+  }, [navigate]);
   const logOut = () => {
     setUser(false);
   };

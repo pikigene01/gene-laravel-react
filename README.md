@@ -44,6 +44,10 @@ Inside your .env file make sure you have google keys
 GOOGLE_CLIENT_ID=
 GOOGLE_CLIENT_SECRET=
 ---
+Under This Url https://console.cloud.google.com/apis/credentials
+---
+Make Sure You Made Authorised JavaScript origins For use with requests from a web server to http://localhost:8000 or App root URL
+---
 
 ### Routes 
 
